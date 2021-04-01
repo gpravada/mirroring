@@ -11,7 +11,7 @@ build-job:
     - cd scripts
     - python -c 'from gen_ver import gen_version; gen_version("../version.h.in", "patch")'
     - ls -l
-    - cat scripts/version.h.in
+    - cat ../version.h.in
   artifacts:
     paths:
       - scripts/version.h.in
