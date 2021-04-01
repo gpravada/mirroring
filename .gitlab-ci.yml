@@ -14,7 +14,7 @@ build-job:
     - cat ../version.h.in
   artifacts:
     paths:
-      - scripts/version.h.in
+      - ../version.h.in
     untracked: false
     expire_in: 30 days
   rules:
@@ -27,8 +27,8 @@ increment_version:
     - build-job   
   script:
     - ls -l
-    - echo "Incremented version file is - $(cat version.txt)"
-    - echo "$(cat scripts/version.h.in)"
+    - echo "Incremented version file is:"
+    - echo "$(cat version.h.in)"
   artifacts:
     paths:
       - scripts/version.h.in
