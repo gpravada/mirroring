@@ -7,7 +7,6 @@ build-job:
   script:
     - echo "Starting Build ......"
     - pip install requests python-gitlab semver
-    - pip install 
     - python -m ./scripts/gen_ver.py
     - ls -l
   rules:
