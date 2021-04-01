@@ -83,6 +83,5 @@ def gen_version(file_path: str, increment_type: str):
     print(ver)
     print(new_file)
     fp.close()
-    fp.detach()
     return 
 
