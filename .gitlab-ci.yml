@@ -10,11 +10,11 @@ build-job:
     - pip install requests python-gitlab semver
     - cd scripts
     - python -c 'from gen_ver import gen_version; gen_version("../version.h.in", "patch")'
-    - ls -l
-    - cat ../version.h.in
+    - cd ..
+    - cat version.h.in
   artifacts:
     paths:
-      - ../version.h.in
+      - version.h.in
     untracked: false
     expire_in: 30 days
   rules:
@@ -31,7 +31,7 @@ increment_version:
     - echo "$(cat version.h.in)"
   artifacts:
     paths:
-      - scripts/version.h.in
+      - version.h.in
   only: 
     refs:
       - master
