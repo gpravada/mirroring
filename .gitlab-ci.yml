@@ -1,7 +1,7 @@
 stages:
   - build
 
-.build-job: 
+build-job: 
   stage: build
   image: ubuntu:latest
   script:
