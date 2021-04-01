@@ -1,5 +1,6 @@
 stages:
   - build
+  - publish
 
 build-job: 
   stage: build
@@ -10,6 +11,27 @@ build-job:
     - cd scripts
     - python -c 'from gen_ver import gen_version; gen_version("../version.h.in", "patch")'
     - ls -l
-    - cat ../version.h.in
+    - cat scripts/version.h.in
+  artifacts:
+    paths:
+      - scripts/version.h.in
+    untracked: false
+    expire_in: 30 days
   rules:
     - when: always
+
+increment_version:
+  stage: publish
+  image: python:3.7
+  dependencies:
+    - build-job   
+  script:
+    - ls -l
+    - echo "Incremented version file is - $(cat version.txt)"
+    - echo "$(cat scripts/version.h.in)"
+  artifacts:
+    paths:
+      - scripts/version.h.in
+  only: 
+    refs:
+      - master
