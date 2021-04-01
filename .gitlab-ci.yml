@@ -31,7 +31,6 @@ increment_version:
     - echo "$(cat version.h.in)"
     - pip install requests python-gitlab semver
     - cd scripts
-    - a = echo "--git-server $CI_SERVER_URL"
     - echo "--git-token $CI_DEPLOYMENT_TOKEN"
     - echo "--git-project_id $CI_PROJECT_ID"
     - echo "--git-branch $CI_COMMIT_BRANCH"
