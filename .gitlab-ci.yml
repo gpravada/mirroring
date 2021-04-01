@@ -8,7 +8,7 @@ build-job:
     - echo "Starting Build ......"
     - pip install requests python-gitlab semver
     - cd scripts
-    - python -m gen_ver gen_version("vesion.h.in", "patch")
+    - python -c 'from gen_ver import gen_version; gen_version("../version.h.in", "patch")'
     - ls -l
     - cat ../version.h.in
   rules:
