@@ -29,9 +29,8 @@ increment_version:
     - ls -l
     - echo "Incremented version file is:"
     - echo "$(cat version.h.in)"
-  artifacts:
-    paths:
-      - version.h.in
+    - pip install requests python-gitlab semver
+    - python -c 'from gen_ver import push_version; push_version("version.h.in", --git-server $CI_SERVER_URL --git-token $CI_DEPLOYMENT_TOKEN --git-project_id $CI_PROJECT_ID --git-branch $CI_COMMIT_BRANCH)'
   only: 
     refs:
       - master
