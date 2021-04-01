@@ -82,6 +82,8 @@ def gen_version(file_path: str, increment_type: str):
     (ver, new_file) = generate_new_version_file(fp.read(), increment_type)
     print(ver)
     print(new_file)
+    fp.seek(0)
+    fp.write(new_file)
     fp.close()
     return 
 
