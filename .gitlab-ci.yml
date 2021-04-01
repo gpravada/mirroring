@@ -9,7 +9,7 @@ build-job:
     - pip install requests python-gitlab semver
     - cd scripts
     - python -m gen_ver generate_new_version_file "vesion.h.in" "patch"
-    - cat version.h.in
     - ls -l
+    - cat ../version.h.in
   rules:
     - when: always
