@@ -1,0 +1,18 @@
+stages:
+  - build
+
+.build-job: 
+  stage: build
+  image: ubuntu:latest
+  script:
+    - echo "Starting Build ......"
+    - apt-get update
+    - apt-get install -y python-dev python3-pip
+    - pip3 install requests python-gitlab semver
+    - python3 scripts/generate_version.py version.h.in patch
+    - ls -l
+  artifacts:
+    paths:
+      #- include/
+  rules:
+    - when: always
