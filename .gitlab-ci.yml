@@ -11,8 +11,5 @@ stages:
     - pip3 install requests python-gitlab semver
     - python3 scripts/generate_version.py version.h.in patch
     - ls -l
-  artifacts:
-    paths:
-      #- include/
   rules:
     - when: always
