@@ -35,7 +35,7 @@ increment_version:
     - echo "$CI_DEPLOYMENT_TOKEN" > token.txt
     - echo "$CI_PROJECT_ID" > pid.txt
     - echo "$CI_COMMIT_BRANCH" > branch.txt
-    - python -c 'from gen_ver import push_version; push_version("version.h.in", "server.txt", "token.txt", "pid.txt", "branch.txt", "version.h.in")'
+    - python -c 'from gen_ver import push_version; push_version("version.h.in", "server.txt", "token.txt", $CI_PROJECT_ID, "branch.txt", "version.h.in")'
   only: 
     refs:
       - master
