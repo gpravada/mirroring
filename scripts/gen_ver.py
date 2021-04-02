@@ -31,7 +31,15 @@ def generate_new_version_file(version_contents: str, increment_type: str):
         new_version_file += line + '\n'
     return (ver, new_version_file)
 
-def push_version(file_path: str, git_server: str):#, git_token: str, project_id: int, branch: str, new_version_file: str):
+def read_file(file_path: str):
+    fp = open(file_path, 'r')
+    fp.seek(0)
+    content=fp.read()
+    print(content + '\n')
+    fp.close()
+    return
+
+def push_version(file_path: str, server: str, token: str, project_id: int, branch: str, new_version_file: str):
     """Publish the new version file to the Git server
 
     Args:
@@ -39,32 +47,27 @@ def push_version(file_path: str, git_server: str):#, git_token: str, project_id:
         git_server: URL of the Git server
         git_token: Access token with permission to write to the Git repo
         project_id: Project id
-        branch: Git Branch to save file too
+        git_branch: Git Branch to save file too
         new_version_file: new version file
 
     Returns:
         True if push is successful
 
     """
-    print(f'file_path: {file_path}')
-    print(f'git_server: {git_server}')
-    fp=open(git_server, 'r+')
-    fp.seek(0)
-    server=fp.read()
-    print(server)
-    # print(f'git_token: {git_token}')
-    # print(f'project_id: {project_id}')
-    # print(f'branch: {branch}')
-    # gl = gitlab.Gitlab(git_server, private_token=git_token)
-    # p = gl.projects.get(project_id)
-    # print(f'Working on project {p.name}')
-    # try:
-    #     f = p.files.get(file_path, branch)
-    #     f.content = new_version_file
-    #     f.save(branch=branch, commit_message='Incrementing version for release [skip ci]')
-    # except gitlab.GitlabGetError as ex:
-    #     print(ex)
-    #     return False
+    git_server=read_file(server)
+    git_token=read_file(token)
+    git_branch=read_file(branch)
+    project_id=read_file(project_id)
+    gl = gitlab.Gitlab(git_server, private_token=git_token)
+    p = gl.projects.get(project_id)
+    print(f'Working on project {p.name}')
+    try:
+        f = p.files.get(file_path, git_branch)
+        f.content = new_version_file
+        f.save(git_branch=git_branch, commit_message='Incrementing version for release [skip ci]')
+    except gitlab.GitlabGetError as ex:
+        print(ex)
+        return False
     return True
 
 def parse_args():
