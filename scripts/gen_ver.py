@@ -50,7 +50,7 @@ def push_version(file_path: str, git_server: str):#, git_token: str, project_id:
     print(f'git_server: {git_server}')
     fp=open(git_server, 'r+')
     fp.seek(0)
-    sever=fp.read()
+    server=fp.read()
     print(server)
     # print(f'git_token: {git_token}')
     # print(f'project_id: {project_id}')
