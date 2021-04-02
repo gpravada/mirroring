@@ -62,9 +62,8 @@ def push_version(file_path: str, server: str, token: str, p_id: str, branch: str
     print(git_branch)
     print(project_id)
     gl = gitlab.Gitlab(git_server, private_token=git_token)
-    print(gl)
-    # p = gl.projects.get(project_id)
-    # print(f'Working on project {p.name}')
+    p = gl.projects.get(project_id)
+    print(f'Working on project {p.name}')
     # try:
     #     f = p.files.get(file_path, git_branch)
     #     f.content = new_version_file
