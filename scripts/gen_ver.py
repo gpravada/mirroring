@@ -46,8 +46,9 @@ def push_version(file_path: str, git_server: str):#, git_token: str, project_id:
         True if push is successful
 
     """
+    server=git_server
     print(f'file_path: {file_path}')
-    print(f'git_server: {git_server}')
+    print(f'git_server: {server}')
     # print(f'git_token: {git_token}')
     # print(f'project_id: {project_id}')
     # print(f'branch: {branch}')
