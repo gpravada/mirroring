@@ -56,7 +56,7 @@ def push_version(file_path: str, server: str, token: str, p_id: str, branch: str
     git_server=str(read_file(server))
     git_token=str(read_file(token))
     git_branch=str(read_file(branch))
-    project_id=read_file(p_id)
+    project_id=str(read_file(p_id))
     print(git_server)
     print(git_token)
     print(git_branch)
