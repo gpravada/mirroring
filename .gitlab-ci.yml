@@ -26,15 +26,16 @@ increment_version:
   # dependencies:
   #   - build-job   
   script:
-    - ls -l
-    - echo "Incremented version file is:"
-    - echo "$(cat version.h.in)"
+    # - ls -l
+    # - echo "Incremented version file is:"
+    # - echo "$(cat version.h.in)"
     - pip install requests python-gitlab semver
-    - cd scripts
+    # - cd scripts
     - echo "$CI_SERVER_URL" > server.txt
     - echo "$CI_DEPLOYMENT_TOKEN" > token.txt
     - echo "$CI_COMMIT_SHORT_SHA" > pid.txt
     - echo "$CI_COMMIT_BRANCH" > branch.txt
+    - cd scripts
     - python -c 'from gen_ver import push_version; push_version("version.h.in", "server.txt", "token.txt", "pid.txt", "branch.txt", "version.h.in")'
   only: 
     refs:
