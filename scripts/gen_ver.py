@@ -37,7 +37,7 @@ def read_file(file_path: str):
     content=fp.read()
     print(content + '\n')
     fp.close()
-    return
+    return content
 
 def push_version(file_path: str, server: str, token: str, p_id: str, branch: str, new_version_file: str):
     """Publish the new version file to the Git server
@@ -57,7 +57,7 @@ def push_version(file_path: str, server: str, token: str, p_id: str, branch: str
     git_server=str(read_file(server))
     git_token=str(read_file(token))
     git_branch=str(read_file(branch))
-    project_id=int(read_file(p_id))
+    project_id=read_file(p_id)
     print(project_id)
     gl = gitlab.Gitlab(git_server, private_token=git_token)
     p = gl.projects.get(project_id)
