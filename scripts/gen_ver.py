@@ -48,19 +48,19 @@ def push_version(file_path: str, git_server: str, git_token: str, project_id: in
     """
     print(f'file_path: {file_path}')
     print(f'git_server: {git_server}')
-    print(f'git_token: {git_token}')
-    print(f'project_id: {project_id}')
-    print(f'branch: {branch}')
-    gl = gitlab.Gitlab(git_server, private_token=git_token)
-    p = gl.projects.get(project_id)
-    print(f'Working on project {p.name}')
-    try:
-        f = p.files.get(file_path, branch)
-        f.content = new_version_file
-        f.save(branch=branch, commit_message='Incrementing version for release [skip ci]')
-    except gitlab.GitlabGetError as ex:
-        print(ex)
-        return False
+    # print(f'git_token: {git_token}')
+    # print(f'project_id: {project_id}')
+    # print(f'branch: {branch}')
+    # gl = gitlab.Gitlab(git_server, private_token=git_token)
+    # p = gl.projects.get(project_id)
+    # print(f'Working on project {p.name}')
+    # try:
+    #     f = p.files.get(file_path, branch)
+    #     f.content = new_version_file
+    #     f.save(branch=branch, commit_message='Incrementing version for release [skip ci]')
+    # except gitlab.GitlabGetError as ex:
+    #     print(ex)
+    #     return False
     return True
 
 def parse_args():
