@@ -35,7 +35,6 @@ def read_file(file_path: str):
     fp = open(file_path, 'r')
     fp.seek(0)
     content=fp.read()
-    print(content + '\n')
     fp.close()
     return content
 
@@ -63,15 +62,16 @@ def push_version(file_path: str, server: str, token: str, p_id: str, branch: str
     print(git_branch)
     print(project_id)
     gl = gitlab.Gitlab(git_server, private_token=git_token)
-    p = gl.projects.get(project_id)
-    print(f'Working on project {p.name}')
-    try:
-        f = p.files.get(file_path, git_branch)
-        f.content = new_version_file
-        f.save(git_branch=git_branch, commit_message='Incrementing version for release [skip ci]')
-    except gitlab.GitlabGetError as ex:
-        print(ex)
-        return False
+    print(g1)
+    # p = gl.projects.get(project_id)
+    # print(f'Working on project {p.name}')
+    # try:
+    #     f = p.files.get(file_path, git_branch)
+    #     f.content = new_version_file
+    #     f.save(git_branch=git_branch, commit_message='Incrementing version for release [skip ci]')
+    # except gitlab.GitlabGetError as ex:
+    #     print(ex)
+    #     return False
     return True
 
 def parse_args():
