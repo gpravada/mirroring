@@ -31,7 +31,9 @@ increment_version:
     - echo "$(cat version.h.in)"
     - pip install requests python-gitlab semver
     - cd scripts
-    - python -c 'from gen_ver import push_version; push_version("version.h.in", "--git-server \"${CI_SERVER_UR}\"", "--git-token \"${CI_DEPLOYMENT_TOKEN}\"", "--git-project_id "\${CI_PROJECT_ID}\"", "--git-branch \"${CI_COMMIT_BRANCH}\"", "version.h.in")'
+    - server="--git-server \"${CI_SERVER_UR}\""
+    - python -c 'from gen_ver import push_version; push_version("version.h.in", server)'
+    #, "--git-token \"${CI_DEPLOYMENT_TOKEN}\"", "--git-project_id "\${CI_PROJECT_ID}\"", "--git-branch \"${CI_COMMIT_BRANCH}\"", "version.h.in")'
   only: 
     refs:
       - master
