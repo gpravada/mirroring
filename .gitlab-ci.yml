@@ -1,30 +1,30 @@
 stages:
-  - build
+  # - build
   - publish
 
-build-job: 
-  stage: build
-  image: python:3.7
-  script:
-    - echo "Starting Build ......"
-    - pip install requests python-gitlab semver
-    - cd scripts
-    - python -c 'from gen_ver import gen_version; gen_version("../version.h.in", "patch")'
-    - cd ..
-    - cat version.h.in
-  artifacts:
-    paths:
-      - version.h.in
-    untracked: false
-    expire_in: 30 days
-  rules:
-    - when: always
+# build-job: 
+#   stage: build
+#   image: python:3.7
+#   script:
+#     - echo "Starting Build ......"
+#     - pip install requests python-gitlab semver
+#     - cd scripts
+#     - python -c 'from gen_ver import gen_version; gen_version("../version.h.in", "patch")'
+#     - cd ..
+#     - cat version.h.in
+#   artifacts:
+#     paths:
+#       - version.h.in
+#     untracked: false
+#     expire_in: 30 days
+#   rules:
+#     - when: always
 
 increment_version:
   stage: publish
   image: python:3.7
-  dependencies:
-    - build-job   
+  # dependencies:
+  #   - build-job   
   script:
     - ls -l
     - echo "Incremented version file is:"
@@ -37,7 +37,7 @@ increment_version:
     # - branch=$(echo "\"--git-branch $CI_COMMIT_BRANCH\"")
     - SRC_DIR="--git-server $CI_SERVER_URL"
     - echo "--git-server $CI_SERVER_URL"
-    - python -c 'from gen_ver import push_version; push_version("version.h.in", "${SRC_DIR}"")'
+    - python -c 'from gen_ver import push_version; push_version("version.h.in", "${SRC_DIR}")'
     #', "--git-token ${CI_DEPLOYMENT_TOKEN}", "--git-project_id ${CI_PROJECT_ID}", "--git-branch ${CI_COMMIT_BRANCH}", "version.h.in")'
     #- python -c 'from gen_ver import push_version; push_version("version.h.in", "${server}", "${token}", "${pid}", "${branch}", "version.h.in" )'
   only: 
