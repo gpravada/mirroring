@@ -31,7 +31,7 @@ def generate_new_version_file(version_contents: str, increment_type: str):
         new_version_file += line + '\n'
     return (ver, new_version_file)
 
-def push_version(file_path: str, git_server: str, git_token: str, project_id: int, branch: str, new_version_file: str):
+def push_version(file_path: str, git_server: str):#, git_token: str, project_id: int, branch: str, new_version_file: str):
     """Publish the new version file to the Git server
 
     Args:
