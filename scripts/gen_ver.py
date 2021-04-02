@@ -58,6 +58,7 @@ def push_version(file_path: str, server: str, token: str, p_id: int, branch: str
     git_token=str(read_file(token))
     git_branch=str(read_file(branch))
     project_id=read_file(p_id)
+    print(project_id)
     gl = gitlab.Gitlab(git_server, private_token=git_token)
     p = gl.projects.get(project_id)
     print(f'Working on project {p.name}')
