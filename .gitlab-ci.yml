@@ -35,10 +35,8 @@ increment_version:
     # - token=$(echo "\"--git-token $CI_DEPLOYMENT_TOKEN\"")
     # - pid=$(echo "\"--git-project_id $CI_PROJECT_ID\"")
     # - branch=$(echo "\"--git-branch $CI_COMMIT_BRANCH\"")
-    - SRC_DIR="--git-server $CI_SERVER_URL"
-    - echo "--git-server $CI_SERVER_URL"
-    - echo "${SRC_DIR}"
-    - python -c 'from gen_ver import push_version; push_version("version.h.in", "${SRC_DIR}")'
+    - echo "--git-server $CI_SERVER_URL" > server.txt
+    - python -c 'from gen_ver import push_version; push_version("version.h.in", "server.txt")'
     #', "--git-token ${CI_DEPLOYMENT_TOKEN}", "--git-project_id ${CI_PROJECT_ID}", "--git-branch ${CI_COMMIT_BRANCH}", "version.h.in")'
     #- python -c 'from gen_ver import push_version; push_version("version.h.in", "${server}", "${token}", "${pid}", "${branch}", "version.h.in" )'
   only: 
