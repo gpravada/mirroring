@@ -38,7 +38,7 @@ def read_file(file_path: str):
     fp.close()
     return content
 
-def push_version(file_path: str, git_server: str, git_token: str, project_id: str, git_branch: str, new_version_file: str):
+def push_version(file_path: str, git_server: int, git_token: int, project_id: int, git_branch: int, new_version_file: str):
     """Publish the new version file to the Git server
 
     Args:
