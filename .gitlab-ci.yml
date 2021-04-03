@@ -24,18 +24,10 @@ build-job:
 increment_version:
   stage: publish
   image: python:3.7
-  # dependencies:
-  #   - build-job   
+  dependencies:
+    - build-job   
   script:
-    # - ls -l
-    # - echo "Incremented version file is:"
-    # - echo "$(cat version.h.in)"
     - pip install requests python-gitlab semver
-    # - cd scripts
-    # - echo "$CI_SERVER_URL" > server.txt
-    # - echo "$CI_DEPLOYMENT_TOKEN" > token.txt
-    # - echo "$CI_COMMIT_SHORT_SHA" > pid.txt
-    # - echo "$CI_COMMIT_BRANCH" > branch.txt
     - cd scripts
     - python -c 'from gen_ver import push_version; push_version("version.h.in", "'$CI_SERVER_URL'", "'$CI_DEPLOYMENT_TOKEN'",'$CI_PROJECT_ID', "'$CI_COMMIT_BRANCH'", "../version.h.in")'
   only: 
