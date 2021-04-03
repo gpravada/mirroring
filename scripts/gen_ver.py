@@ -38,7 +38,7 @@ def read_file(file_path: str):
     fp.close()
     return content
 
-def push_version(file_path: str, server: str, token: str, p_id: str, branch: str, new_version_file: str):
+def push_version(file_path: str, git_server: str, git_token: str, project_id: str, git_branch: str, new_version_file: str):
     """Publish the new version file to the Git server
 
     Args:
@@ -53,24 +53,24 @@ def push_version(file_path: str, server: str, token: str, p_id: str, branch: str
         True if push is successful
 
     """
-    git_server=str(read_file(server))
-    git_token=str(read_file(token))
-    git_branch=str(read_file(branch))
-    project_id=str(read_file(p_id))
+    # git_server=str(read_file(server))
+    # git_token=str(read_file(token))
+    # git_branch=str(read_file(branch))
+    # project_id=str(read_file(p_id))
     print(git_server)
     print(git_token)
-    print(git_branch)
     print(project_id)
-    gl = gitlab.Gitlab(git_server, private_token=git_token)
-    p = gl.projects.get(project_id)
-    print(f'Working on project {p.name}')
-    try:
-        f = p.files.get(file_path, git_branch)
-        f.content = new_version_file
-        f.save(git_branch=git_branch, commit_message='Incrementing version for release [skip ci]')
-    except gitlab.GitlabGetError as ex:
-        print(ex)
-        return False
+    print(git_branch)
+    # gl = gitlab.Gitlab(git_server, private_token=git_token)
+    # p = gl.projects.get(project_id)
+    # print(f'Working on project {p.name}')
+    # try:
+    #     f = p.files.get(file_path, git_branch)
+    #     f.content = new_version_file
+    #     f.save(git_branch=git_branch, commit_message='Incrementing version for release [skip ci]')
+    # except gitlab.GitlabGetError as ex:
+    #     print(ex)
+    #     return False
     return True
 
 def parse_args():
