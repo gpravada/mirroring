@@ -2,7 +2,7 @@ import gitlab
 import argparse
 import semver
 
-def generate_new_version_file(version_contents: str, increment_type: str):
+def generate_new_version_file(version_file: str, increment_type: str):
     """Parses the version file string, increments the appropriate number, and returns the new string
 
     Args:
@@ -12,6 +12,9 @@ def generate_new_version_file(version_contents: str, increment_type: str):
     Returns: Str of the new version file
 
     """
+    fp = open(version_file, 'r+')
+    fp.seek(0)
+    version_contents = fp.read()
     lines = version_contents.splitlines()
     new_version_file = ''
     ver = ''
@@ -29,6 +32,9 @@ def generate_new_version_file(version_contents: str, increment_type: str):
                  raise ValueError('Incorrect version type. Options are major, minor, or patch')
              line = f'#define RELEASE_VERSION \"{ver}\"'    
         new_version_file += line + '\n'
+    fp.seek(0)
+    fp.write(new_version_file)
+    fp.close()        
     return (ver, new_version_file)
 
 def read_file(file_path: str):

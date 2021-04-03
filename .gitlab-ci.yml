@@ -2,23 +2,24 @@ stages:
   # - build
   - publish
 
-# build-job: 
-#   stage: build
-#   image: python:3.7
-#   script:
-#     - echo "Starting Build ......"
-#     - pip install requests python-gitlab semver
-#     - cd scripts
-#     - python -c 'from gen_ver import gen_version; gen_version("../version.h.in", "patch")'
-#     - cd ..
-#     - cat version.h.in
-#   artifacts:
-#     paths:
-#       - version.h.in
-#     untracked: false
-#     expire_in: 30 days
-#   rules:
-#     - when: always
+build-job: 
+  stage: build
+  image: python:3.7
+  script:
+    - echo "Starting Build ......"
+    - pip install requests python-gitlab semver
+    - cat version.h.in
+    - cd scripts
+    - python -c 'from gen_ver import generate_new_version_file; generate_new_version_file("../version.h.in", "patch")'
+    - cd ..
+    - cat version.h.in
+  artifacts:
+    paths:
+      - version.h.in
+    untracked: false
+    expire_in: 30 days
+  rules:
+    - when: always
 
 increment_version:
   stage: publish
