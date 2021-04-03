@@ -59,15 +59,11 @@ def push_version(file_path: str, git_server: str, git_token: str, project_id: in
         True if push is successful
 
     """
-    # git_server=str(read_file(server))
-    # git_token=str(read_file(token))
-    # git_branch=str(read_file(branch))
-    # project_id=str(read_file(p_id))
-    print(git_server)
-    print(git_token)
-    print(project_id)
-    print(git_branch)
-    gl = gitlab.Gitlab(git_server, private_token=git_token)
+    fp = open(new_version_file, 'r')
+    src_data = fp.read()
+    print(src_data)
+    print(f'Destination file path: {file_path}')
+    #gl = gitlab.Gitlab(git_server, private_token=git_token)
     # p = gl.projects.get(project_id)
     # print(f'Working on project {p.name}')
     # try:
