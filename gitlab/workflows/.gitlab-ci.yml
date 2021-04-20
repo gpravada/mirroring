@@ -37,8 +37,10 @@ increment_version:
 
 test_gen_Version:
   stage: test
-  image: python:3.7
+  image: ubuntu:latest
   script: 
+    - apt-get install -y python-dev python3-pip
+    - pip3 install requests python-pytest semver
     - pytest gen_ver.py
   only: 
     refs:

@@ -103,6 +103,6 @@ def gen_version(file_path: str, increment_type: str):
     fp.close()
     return ver
 
-def test_gen_version(file_path: str, inc_type: str):
-    ver = gen_version(file_path, inc_type)
+def test_gen_version():
+    (ver,new_file) = gen_version("../version.h.in", patch)
     assert ver == "0.8.1"
