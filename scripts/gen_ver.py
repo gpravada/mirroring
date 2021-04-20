@@ -92,17 +92,11 @@ def parse_args():
             p.error('If one git_* argument is set they all must be')
     return args
 
-def gen_version(file_path: str, increment_type: str):
-    #fp = open(file_path, 'r+')
-    #fp.seek(0)
-    (ver, new_file) = generate_new_version_file(fp.read(), increment_type)
-    print(ver)
-    print(new_file)
-    #fp.seek(0)
-    #fp.write(new_file)
-    #fp.close()
-    return (ver, new_file)
+# def gen_version(file_path: str, increment_type: str):
+#     (ver, new_file) = generate_new_version_file(file_path, increment_type)
+#     print(new_file)
+#     return (ver, new_file)
 
 def test_gen_version(file_path: str, increment_type: str):
-    (ver,new_file) = gen_version(file_path, increment_type)
+    (ver,new_file) = generate_new_version_file(file_path, increment_type)
     assert ver == "0.8.1"
