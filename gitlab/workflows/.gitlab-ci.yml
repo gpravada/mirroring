@@ -39,6 +39,7 @@ test_gen_Version:
   stage: test
   image: python:3.7
   script: 
+    - cd scripts
     - python -c 'from gen_ver import test_gen_version; test_gen_version("../version.h.in", patch)'
   only: 
     refs:
