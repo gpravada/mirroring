@@ -41,7 +41,7 @@ test_gen_Version:
   script: 
     - pip install requests python-gitlab semver
     - cd scripts
-    - python -c 'from gen_ver import test_gen_version; test_gen_version("../version.h.in", patch)'
+    - python -c 'from gen_ver import test_gen_version; test_gen_version("../version.h.in", "patch")'
   only: 
     refs:
       - master    
