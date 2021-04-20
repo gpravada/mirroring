@@ -101,4 +101,4 @@ def test_gen_version(file_path: str, increment_type: str):
     (ver,new_file) = generate_new_version_file(file_path, increment_type)
     print(ver)
     print(new_file)
-    assert ver == "0.8.1"
+    assert ver == "0.8.2"
