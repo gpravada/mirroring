@@ -1,0 +1,35 @@
+stages:
+  - build
+  - publish
+
+build-job: 
+  stage: build
+  image: python:3.7
+  script:
+    - echo "Starting Build ......"
+    - pip install requests python-gitlab semver
+    - cat version.h.in
+    - cd scripts
+    - python -c 'from gen_ver import generate_new_version_file; generate_new_version_file("../version.h.in", "patch")'
+    - cd ..
+    - cat version.h.in
+  artifacts:
+    paths:
+      - version.h.in
+    untracked: false
+    expire_in: 30 days
+  rules:
+    - when: always
+
+increment_version:
+  stage: publish
+  image: python:3.7
+  dependencies:
+    - build-job   
+  script:
+    - pip install requests python-gitlab semver
+    - cd scripts
+    - python -c 'from gen_ver import push_version; push_version("version.h.in", "'$CI_SERVER_URL'", "'$CI_DEPLOYMENT_TOKEN'",'$CI_PROJECT_ID', "'$CI_COMMIT_BRANCH'", "../version.h.in")'
+  only: 
+    refs:
+      - master
