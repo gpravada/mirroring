@@ -40,8 +40,8 @@ test_gen_Version:
   image: ubuntu:latest
   script: 
     - apt-get update
-    - apt-get install -y python-dev python3-pip
-    - pip3 install requests python-pytest semver
+    - apt-get install -y python-dev python3-pip python-pytest
+    - pip3 install request semver
     - pytest gen_ver.py
   only: 
     refs:
