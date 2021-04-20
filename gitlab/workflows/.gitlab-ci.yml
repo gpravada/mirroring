@@ -39,6 +39,7 @@ test_gen_Version:
   stage: test
   image: ubuntu:latest
   script: 
+    - apt-get update
     - apt-get install -y python-dev python3-pip
     - pip3 install requests python-pytest semver
     - pytest gen_ver.py
