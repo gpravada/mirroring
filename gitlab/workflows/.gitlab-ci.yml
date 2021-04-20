@@ -41,7 +41,7 @@ test_gen_Version:
   script: 
     - apt-get update
     - apt-get install -y python-dev python3-pip python-pytest
-    - pip3 install request semver
+    - pip3 install requests semver
     - pytest gen_ver.py
   only: 
     refs:
