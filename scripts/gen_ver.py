@@ -93,15 +93,15 @@ def parse_args():
     return args
 
 def gen_version(file_path: str, increment_type: str):
-    fp = open(file_path, 'r+')
-    fp.seek(0)
+    #fp = open(file_path, 'r+')
+    #fp.seek(0)
     (ver, new_file) = generate_new_version_file(fp.read(), increment_type)
     print(ver)
     print(new_file)
-    fp.seek(0)
-    fp.write(new_file)
-    fp.close()
-    return ver
+    #fp.seek(0)
+    #fp.write(new_file)
+    #fp.close()
+    return (ver, new_file)
 
 def test_gen_version(file_path: str, increment_type: str):
     (ver,new_file) = gen_version(file_path, increment_type)
