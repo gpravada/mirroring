@@ -101,5 +101,8 @@ def gen_version(file_path: str, increment_type: str):
     fp.seek(0)
     fp.write(new_file)
     fp.close()
-    return 
+    return ver
 
+def test_gen_version(file_path: str, inc_type: str):
+    ver = gen_version(file_path, inc_type)
+    assert ver == "0.8.1"

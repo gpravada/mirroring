@@ -33,3 +33,12 @@ increment_version:
   only: 
     refs:
       - master
+
+test_gen_Version:
+  stage: test
+  image: python:3.7
+  script: 
+    - pytest gen_ver.py
+  only: 
+    refs:
+      - master    
