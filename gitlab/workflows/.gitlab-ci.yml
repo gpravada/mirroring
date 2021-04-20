@@ -35,14 +35,11 @@ increment_version:
     refs:
       - master
 
-# test_gen_Version:
-#   stage: test
-#   image: ubuntu:latest
-#   script: 
-#     - apt-get update
-#     - apt-get install -y python3.7 python3-pip python-pytest
-#     - pip3 install requests semver
-#     - pytest ./scripts/gen_ver.py
-#   only: 
-#     refs:
-#       - master    
+test_gen_Version:
+  stage: test
+  image: python:3.7
+  script: 
+    - python -c 'from gen_ver import test_gen_version; test_gen_version("../version.h.in", patch)'
+  only: 
+    refs:
+      - master    
